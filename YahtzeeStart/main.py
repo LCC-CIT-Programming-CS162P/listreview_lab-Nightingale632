@@ -1,3 +1,4 @@
+'''Drazdon Fenton'''
 from time import sleep
 import os
 import random
@@ -9,6 +10,7 @@ import playing
 
 # TODO: write main AFTER you have written and tested each function
 def main():
+    '''Lab 1, Problem 1 Yahtzee'''
     """
     create a list of lists for the scorecard
     set userTurn to false

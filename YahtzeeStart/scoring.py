@@ -32,23 +32,23 @@ def scoreOnes(counts):
 
 
 def scoreTwos(counts):
-    return 0
+    return counts[constants.TWOS] * 1
 
 
 def scoreThrees(counts):
-    return 0
+    return counts[constants.Threes] * 1
 
 
 def scoreFours(counts):
-    return 0
+    return counts[constants.FOURS] * 1
 
 
 def scoreFives(counts):
-    return 0
+    return counts[constants.FIVES] * 1
 
 
 def scoreSixes(counts):
-    return 0
+    return counts[constants.SIXES] * 1
 
 
 def scoreThreeOfAKind(counts):
@@ -61,11 +61,17 @@ def scoreThreeOfAKind(counts):
 
 
 def scoreFourOfAKind(counts):
-    return 0
+    if hasCount(4, counts) or hasCount(5, counts):
+        return getTotal(counts)
+    else:
+        return 0
 
 
 def scoreFullHouse(counts):
-    return 0
+    if hasCount(5, counts):
+        return getTotal(counts)
+    else:
+        return 0
 
 
 def scoreSmallStraight(counts):
