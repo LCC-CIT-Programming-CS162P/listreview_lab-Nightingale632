@@ -32,23 +32,23 @@ def scoreOnes(counts):
 
 
 def scoreTwos(counts):
-    return counts[constants.TWOS] * 1
+    return counts[constants.TWOS] * 2
 
 
 def scoreThrees(counts):
-    return counts[constants.Threes] * 1
+    return counts[constants.Threes] * 3
 
 
 def scoreFours(counts):
-    return counts[constants.FOURS] * 1
+    return counts[constants.FOURS] * 4
 
 
 def scoreFives(counts):
-    return counts[constants.FIVES] * 1
+    return counts[constants.FIVES] * 5
 
 
 def scoreSixes(counts):
-    return counts[constants.SIXES] * 1
+    return counts[constants.SIXES] * 6
 
 
 def scoreThreeOfAKind(counts):
@@ -97,11 +97,13 @@ def scoreLargeStraight(counts):
 
 
 def scoreYahtzee(counts):
-    return 0
-
+    if hasCount(5, counts):
+       return 50
+    else:
+        return 0
 
 def scoreChance(counts):
-    return 0
+    return getTotal(counts)
 
 
 def score(whichElement, dice):
