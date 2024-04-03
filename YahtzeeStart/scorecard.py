@@ -12,6 +12,10 @@ def resetScorecard(scorecard):
     The subtotal, bonus and total should be set to 0.
     It does not return a value but the scorecard is altered by the function
     """
+    newScorecard = [[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 0, -1],
+            [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 0, -1]]
+    scorecard.clear()
+    scorecard.extend(newScorecard)
 
 
 def updateScorecard(scorecard):

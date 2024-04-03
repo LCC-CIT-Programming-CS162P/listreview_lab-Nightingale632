@@ -3,7 +3,7 @@
 """
 
 from os import system, name
-from time import sleep
+import time
 import random
 
 import constants
@@ -29,6 +29,38 @@ def userPlay(uScorecard):
         itemIndex = call getScorecardItme
         set the element in the user's scorecard based on the score of the dice in keeping
     """
+    print(f"Scorecard: {uScorecard}")
+    keeping = []
+    rolling = []
+    rollCount = 0
+    itemIndex = -1
+    while rollCount < 3 and len(keeping) < 5:
+        roll(5 -len(keeping), rolling)
+        print("you have rolled: ")
+        displayDice(rolling)
+        rollCount += 1
+        print(f"You have {3 - rollCount} throws left.")
+        if rollCount < 3:
+            getKeeping(rolling, keeping)
+            print(f"keeping {keeping}.")
+        else:
+            moveRollToKeep(rolling, keeping)
+            print(f"keeping {keeping}.")
+        displayDice(keeping)
+        print()
+
+    time.sleep(1)
+    itemIndex = getScorecardItem(uScorecard)
+    uScorecard[itemIndex] = scoring.score(itemIndex, keeping)
+    print(uScorecard)
+    print(f"itemIndex = {itemIndex}")
+
+    print(
+        f"keeping: {keeping}\n"
+        f"rolling: {rolling}\n"
+        f"itemIndex: {itemIndex}\n"
+        f"rollCount: {rollCount}\n"
+          )
 
 
 def computerPlay(cScorecard):
@@ -37,7 +69,7 @@ def computerPlay(cScorecard):
     roll(5, keeping)
     print("The dice the computer rolled: ")
     displayDice(keeping)
-    sleep(5)
+    time.sleep(5)
     itemIndex = getComputerScorecardItem(cScorecard, keeping)
     cScorecard[itemIndex] = scoring.score(itemIndex, keeping)
 

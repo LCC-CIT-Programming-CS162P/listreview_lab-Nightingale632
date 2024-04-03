@@ -1,5 +1,5 @@
 '''Drazdon Fenton'''
-from time import sleep
+import time
 import os
 import random
 
@@ -33,6 +33,31 @@ def main():
      determine who won and display a message
 
     """
+    card = [[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 0, -1],
+            [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 0, -1]]
+    userTurn = False
+    scorecard.resetScorecard(card)
+
+    while any(constants.EMPTY in row for row in card):
+        userTurn = True
+        scorecard.updateScorecard(card)
+        scorecard.displayScorecards(card)
+        time.sleep(1)
+
+        if userTurn:
+            print('Your Turn')
+            time.sleep(1)
+            playing.userPlay(card[0])
+            scorecard.displayScorecards(card)
+            userTurn = False
+            playing.clear()
+
+        if not userTurn:
+            print('Opponents Turn')
+            time.sleep(1)
+            playing.computerPlay(card[1])
+            playing.clear()
+
 
 
 # this block is the same all of the time
