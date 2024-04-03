@@ -69,7 +69,7 @@ def scoreFourOfAKind(counts):
 
 def scoreFullHouse(counts):
     if hasCount(5, counts):
-        return getTotal(counts)
+        return 25
     else:
         return 0
 
