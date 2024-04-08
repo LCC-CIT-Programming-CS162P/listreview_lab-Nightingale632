@@ -12,17 +12,39 @@ def resetScorecard(scorecard):
     The subtotal, bonus and total should be set to 0.
     It does not return a value but the scorecard is altered by the function
     """
-    newScorecard = [[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 0, -1],
-            [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 0, -1]]
-    scorecard.clear()
-    scorecard.extend(newScorecard)
+    for c in range(2):
+        for r in range(16):
+            scorecard[c].append(-1)
+        scorecard[c][13] = (0)
+        scorecard[c][14] = (0)
+        scorecard[c][15] = (0)
 
 
-def updateScorecard(scorecard):
+def updateScorecard(scoreCard):
     """ takes the 2-d list that represents the scorecard as it's parameter and
     calculates the subtotal, bonus and total for both the user and the computer.
     It does not return a value but the scorecard is altered by the function
     """
+    scoreCard[constants.USER][constants.SUBTOTAL] = 0
+    scoreCard[constants.COMPUTER][constants.SUBTOTAL] = 0
+    scoreCard[constants.USER][constants.TOTAL] = 0
+    scoreCard[constants.COMPUTER][constants.TOTAL] = 0
+    #updates scoreboard
+    for c in range(2):
+        for r in range(6):
+            #calc subtotals
+            if scoreCard[c][r] != constants.EMPTY:
+                scoreCard[c][constants.SUBTOTAL] += scoreCard[c][r]
+        #bonus
+        if scoreCard[c][constants.SUBTOTAL] >= 63:
+            scoreCard[c][constants.BONUS] = 35
+        else:
+            scoreCard[c][constants.BONUS] = 0
+        #calc totals
+        for r in range(constants.THREE_OF_A_KIND, constants.TOTAL):
+            if scoreCard[c][r] != constants.EMPTY:
+                scoreCard[c][constants.TOTAL] += scoreCard[c][r]
+
 
 
 def formatCell(value):

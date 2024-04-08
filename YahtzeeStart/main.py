@@ -3,10 +3,11 @@ import time
 import os
 import random
 
-import constants
 import scoring
+import constants
 import scorecard
 import playing
+
 
 # TODO: write main AFTER you have written and tested each function
 def main():
@@ -33,30 +34,33 @@ def main():
      determine who won and display a message
 
     """
-    card = [[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 0, -1],
-            [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 0, -1]]
+    print("Yahtzee!")
+    print("\nTo select the dice to keep, just type the indices (0 thru 4) for the list of dice. Example: 0 2 4")
+    print("\nTo designate a move, type the number from the Yahtzee game board (0 thru 12). example: 8 for a Fullhouse\n")
+    scoreCard = [[], []]
     userTurn = False
-    scorecard.resetScorecard(card)
-
-    while any(constants.EMPTY in row for row in card):
-        userTurn = True
-        scorecard.updateScorecard(card)
-        scorecard.displayScorecards(card)
-        time.sleep(1)
-
-        if userTurn:
-            print('Your Turn')
-            time.sleep(1)
-            playing.userPlay(card[0])
-            scorecard.displayScorecards(card)
-            userTurn = False
-            playing.clear()
-
+    scorecard.resetScorecard(scoreCard)
+    while constants.EMPTY in scoreCard[constants.USER][constants.ONES:constants.SUBTOTAL] or constants.EMPTY in scoreCard[constants.COMPUTER][constants.ONES:constants.SUBTOTAL]:
         if not userTurn:
-            print('Opponents Turn')
-            time.sleep(1)
-            playing.computerPlay(card[1])
-            playing.clear()
+            userTurn = True
+        else:
+            userTurn = False
+        scorecard.updateScorecard(scoreCard)
+        scorecard.displayScorecards(scoreCard)
+        if userTurn:
+            print("It is your turn.")
+            playing.userPlay(scoreCard[0])
+        else:
+            print("It is the computers turn.")
+            playing.computerPlay(scoreCard[1])
+        #time.sleep(1)
+
+    scoreCard.updateScorecard(scoreCard)
+    scoreCard.displayScorecards(scoreCard)
+    if scoreCard[constants.USER][constants.TOTAL] >= scoreCard[constants.COMPUTER][constants.TOTAL]:
+        print("You Won!")
+    else:
+        print("Sorry, you lost.")
 
 
 
