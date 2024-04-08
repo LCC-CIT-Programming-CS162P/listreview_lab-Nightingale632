@@ -8,13 +8,19 @@ def getCounts(dice):
     """ this helper function takes a list of 5 dice as it's parameter and returns an list
         The list contains the number of 1, 2, 3, 4, 5 and 6 represented in the dice
     """
-    return []
+    counts = [0, 0, 0, 0, 0, 0]
+    for die in dice:
+        counts[die - 1] += 1
+    return counts
 
 
 def getTotal(counts):
     """ this helper function takes the list of counts as it's parameter and returns the sum of the values of the dice
     """
-    return 0
+    total = 0
+    for i in range(6):
+        total += counts[i] * (i + 1)
+    return total
 
 
 def hasCount(howMany, counts):
@@ -22,6 +28,9 @@ def hasCount(howMany, counts):
     It returns true if any of the values in count match the integer parameter.
     This function is used in scoreThreeOfAKind (for example) to determine if there are 3 of any number.
     """
+    for count in counts:
+        if count == howMany:
+            return True
     return False
 
 
@@ -36,7 +45,7 @@ def scoreTwos(counts):
 
 
 def scoreThrees(counts):
-    return counts[constants.Threes] * 3
+    return counts[constants.THREES] * 3
 
 
 def scoreFours(counts):
@@ -68,7 +77,7 @@ def scoreFourOfAKind(counts):
 
 
 def scoreFullHouse(counts):
-    if hasCount(5, counts):
+    if hasCount(3, counts) and hasCount(2, counts) or hasCount(5, counts):
         return 25
     else:
         return 0
