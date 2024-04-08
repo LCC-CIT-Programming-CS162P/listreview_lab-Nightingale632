@@ -50,10 +50,11 @@ def main():
         if userTurn:
             print("It is your turn.")
             playing.userPlay(scoreCard[0])
+            time.sleep(1)
         else:
             print("It is the computers turn.")
             playing.computerPlay(scoreCard[1])
-        #time.sleep(1)
+            time.sleep(1)
 
     scoreCard.updateScorecard(scoreCard)
     scoreCard.displayScorecards(scoreCard)
